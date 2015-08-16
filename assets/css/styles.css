@@ -280,11 +280,6 @@ input[type="checkbox"]:checked + label .icon svg {
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
-@media (min-width: 1100px) {
-  .table tbody tr:focus .hidden-popup {
-    display: none !important;
-  }
-}
 .table tbody tr:nth-last-child(1) .hidden-popup,
 .table tbody tr:nth-last-child(2) .hidden-popup,
 .table tbody tr:nth-last-child(3) .hidden-popup,
