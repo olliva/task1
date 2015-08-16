@@ -23,42 +23,42 @@ var concat = require('gulp-concat'),
 // compile less -> .css -> min.css
 gulp.task('less', function () {
 
-    gulp.src('_assets/_less/styles.less')
+    gulp.src('assets/_less/styles.less')
         .pipe(less())
         .on('error', function(err){ console.log(err.message); })
         .pipe(minifyCSS({
             keepSpecialComments: 0
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('_assets/css/'));
+        .pipe(gulp.dest('assets/css/'));
 
 });
 
 // compile bootstrap less -> .css -> min.css
 gulp.task('less-bootstrap', function () {
 
-    gulp.src('_assets/bootstrap/less/bootstrap.less')
+    gulp.src('assets/bootstrap/less/bootstrap.less')
         .pipe(less())
         .on('error', function(err){ console.log(err.message); })
         .pipe(minifyCSS({
             keepSpecialComments: 0
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('_assets/bootstrap/dist/'));
+        .pipe(gulp.dest('assets/bootstrap/dist/'));
 
 });
 
 // Compile _js -> _js.min
 gulp.task('_js.min', function() {
-    gulp.src('_assets/_js/*.js')
+    gulp.src('assets/_js/*.js')
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('_assets/_js.min/'));
+        .pipe(gulp.dest('assets/_js.min/'));
 });
 
 // Create sprite from _assets/img/sprite/*.png, write less, create sprite.png
 gulp.task('sprite', function () {
-    var spriteData = gulp.src('_assets/img/sprite/*.png').pipe(spritesmith({
+    var spriteData = gulp.src('assets/img/sprite/*.png').pipe(spritesmith({
         imgName: 'sprite.png',
         cssName: 'sprite.less',
         cssTemplate: 'less.template.svk.custom.mustache',
@@ -73,15 +73,15 @@ gulp.task('sprite', function () {
             use: [pngquant()]
     }));
 
-    spriteData.img.pipe(gulp.dest('_assets/img')); // путь, куда сохраняем картинку
-    spriteData.css.pipe(gulp.dest('_assets/_less')); // путь, куда сохраняем стили
+    spriteData.img.pipe(gulp.dest('assets/img')); // путь, куда сохраняем картинку
+    spriteData.css.pipe(gulp.dest('assets/_less')); // путь, куда сохраняем стили
 });
 
 // {include file="svg-all.svg"}
 // <i class="icon i-header-logo"><svg><use xlink:href="#icon-header-logo" /></svg></i>
 gulp.task('svgstore', function () {
     return gulp
-        .src('_assets/img/svg/*.svg')
+        .src('assets/img/svg/*.svg')
         .pipe(svgmin())
         .pipe(rename({prefix: 'icon-'}))
         .pipe(cheerio({
@@ -130,7 +130,7 @@ gulp.task('svgstore', function () {
         }))
         .pipe(svgstore())
         .pipe(rename('svg-all.svg'))
-        .pipe(gulp.dest('_assets/img/'));
+        .pipe(gulp.dest('assets/img/'));
 });
 
 // Watch for changes, and live reload
@@ -142,7 +142,7 @@ gulp.task('watch', function () {
     //gulp.watch('_assets/_js/*.js', ['_js.min']).on('change', livereload.changed);
 
     // Watch .less files and run tasks if they change
-    gulp.watch('_assets/_less/*.less', ['less']).on('change', livereload.changed);
+    gulp.watch('assets/_less/*.less', ['less']).on('change', livereload.changed);
 
     //gulp.watch('_assets/bootstrap3.3.4/less/*.less', ['less-bootstrap']).on('change', livereload.changed);
 
