@@ -1,0 +1,92 @@
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+	@s-aeroflot-big: 0px 200px 0px -200px 150px 33px 346px 286px 'sprite.png' s-aeroflot-big;
+	@s-aeroflot-small: 300px 15px -300px -15px 46px 14px 346px 286px 'sprite.png' s-aeroflot-small;
+	@s-air-serbia-big: 0px 0px 0px 0px 150px 71px 346px 286px 'sprite.png' s-air-serbia-big;
+	@s-air-serbia-small: 0px 263px 0px -263px 46px 23px 346px 286px 'sprite.png' s-air-serbia-small;
+	@s-aireurope-big: 0px 165px 0px -165px 150px 35px 346px 286px 'sprite.png' s-aireurope-big;
+	@s-aireurope-small: 182px 263px -182px -263px 60px 14px 346px 286px 'sprite.png' s-aireurope-small;
+	@s-airfrance-big: 150px 233px -150px -233px 150px 17px 346px 286px 'sprite.png' s-airfrance-big;
+	@s-airfrance-small: 150px 117px -150px -117px 58px 7px 346px 286px 'sprite.png' s-airfrance-small;
+	@s-alitalia-big: 150px 43px -150px -43px 150px 38px 346px 286px 'sprite.png' s-alitalia-big;
+	@s-alitalia-small: 300px 43px -300px -43px 46px 12px 346px 286px 'sprite.png' s-alitalia-small;
+	@s-chine-eastern-air-big: 150px 129px -150px -129px 150px 36px 346px 286px 'sprite.png' s-chine-eastern-air-big;
+	@s-chine-eastern-air-small: 300px 29px -300px -29px 46px 14px 346px 286px 'sprite.png' s-chine-eastern-air-small;
+	@s-czechairlines-big: 0px 129px 0px -129px 150px 36px 346px 286px 'sprite.png' s-czechairlines-big;
+	@s-czechairlines-small: 242px 263px -242px -263px 58px 14px 346px 286px 'sprite.png' s-czechairlines-small;
+	@s-klm-big: 150px 200px -150px -200px 150px 31px 346px 286px 'sprite.png' s-klm-big;
+	@s-klm-small: 300px 66px -300px -66px 32px 14px 346px 286px 'sprite.png' s-klm-small;
+	@s-nw-big: 0px 233px 0px -233px 150px 30px 346px 286px 'sprite.png' s-nw-big;
+	@s-nw-small: 46px 263px -46px -263px 72px 14px 346px 286px 'sprite.png' s-nw-small;
+	@s-onurair-big: 150px 165px -150px -165px 150px 33px 346px 286px 'sprite.png' s-onurair-big;
+	@s-onurair-small: 118px 263px -118px -263px 64px 14px 346px 286px 'sprite.png' s-onurair-small;
+	@s-pegas-big: 150px 0px -150px 0px 150px 43px 346px 286px 'sprite.png' s-pegas-big;
+	@s-pegas-small: 150px 250px -150px -250px 50px 13px 346px 286px 'sprite.png' s-pegas-small;
+	@s-royal-flight-big: 150px 81px -150px -81px 150px 36px 346px 286px 'sprite.png' s-royal-flight-big;
+	@s-royal-flight-small: 300px 55px -300px -55px 46px 11px 346px 286px 'sprite.png' s-royal-flight-small;
+	@s-vueling-big: 0px 71px 0px -71px 150px 58px 346px 286px 'sprite.png' s-vueling-big;
+	@s-vueling-small: 300px 0px -300px 0px 46px 15px 346px 286px 'sprite.png' s-vueling-small;
+
+
+	/*
+	The provided classes are intended to be used with the array-like variables
+
+	.icon-home {
+	.sprite-width(@icon-home);
+	}
+	.icon-email {
+	.sprite(@icon-email);
+	}
+	*/
+	.sprite-width(@sprite) {
+	width: extract(@sprite, 5);
+	}
+
+	.sprite-height(@sprite) {
+	height: extract(@sprite, 6);
+	}
+
+	.sprite-position(@sprite) {
+	@sprite-offset-x: extract(@sprite, 3);
+	@sprite-offset-y: extract(@sprite, 4);
+	background-position: @sprite-offset-x @sprite-offset-y;
+	}
+
+	.sprite-image(@sprite) {
+	@sprite-image: extract(@sprite, 9);
+	@sprite-image-bare: ~`"../img/"+"@{sprite-image}".slice(1, -1)`;
+	background-image: url(@sprite-image-bare);
+	}
+
+	.sprite(@sprite) {
+	.sprite-image(@sprite);
+	.sprite-position(@sprite);
+	.sprite-width(@sprite);
+	.sprite-height(@sprite);
+	}
+
+	/*
+	The `.sprites` mixin generates identical output to the CSS template
+	but can be overridden inside of LESS
+
+	.sprites(@spritesheet-sprites);
+	*/
+	.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+	@sprite: extract(@sprites, @i);
+	@sprite-name: extract(@sprite, 10);
+	.@{sprite-name} {
+	.sprite(@sprite);
+	}
+	.sprites(@sprites, @i + 1);
+	}

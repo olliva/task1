@@ -1,0 +1,50 @@
+/*
+	Файл layout.less
+	Только общая сетка сайта (конейнер, хедер, (не)прибитый футер, колонки)
+*/
+
+/* -----------------------------------*/
+/* ---------->>> LAYOUT   <<<---------*/
+/* -----------------------------------*/
+
+@footer-height: 70px;
+
+/*    LAYOUT
+    ----------------------------------------------------------------- */
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+html, body {
+	height: 100%;
+	margin:0;
+	padding: 0;
+	position:relative;
+	min-width: 800px;
+}
+.page {
+	min-height: 100%;
+	position: relative;
+	background: #8fc1e0;
+	padding: 40px 50px 40px;
+	min-width: 900px;
+}
+.white-page{
+	margin: auto;
+	position: relative;
+	z-index: 1;
+	.page-cont{
+		background: #fff;
+		padding: 35px 25px 60px;
+	}
+}
+
+.page-cont{
+	max-width: 1230px;
+	min-width: 800px;
+	padding: 0 25px;
+	margin: auto;
+}
+

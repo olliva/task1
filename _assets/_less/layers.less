@@ -1,0 +1,518 @@
+/**/
+html, body {
+	overflow: initial;
+	background: none;
+}
+h1{
+	margin-bottom: 25px;
+}
+input[type="checkbox"]{
+	display: none;
+	& + label{
+		padding-left: 30px;
+		position: relative;
+		.inline-block;
+		vertical-align: middle;
+		margin-right: 30px;
+		cursor: pointer;
+		.icon{
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			display: block;
+			top: 0;
+			left: 0;
+			border: 1px solid @link-color;
+			border-radius: 3px;
+			.transition(border-color 0.3s);
+			svg{
+				width: 14px;
+				height: 14px;
+				margin: 2px;
+				fill: transparent;
+				.transition(fill 0.3s);
+			}
+		}
+		.plane-icon{
+			fill: @link-color;
+		}
+		&:hover{
+			.icon{
+				border-color: @link-hover-color;
+			}
+			.plane-icon{
+				fill: @link-hover-color;
+			}
+		}
+	}
+	&:checked{
+		& + label{
+			.icon{
+				svg{
+					fill: @link-color;
+				}
+			}
+		}
+	}
+}
+.table-part{
+	margin-top: 20px;
+	.table-cont{
+		position: relative;
+		overflow: hidden;
+		z-index: 1;
+	}
+}
+.table-fixed-header{
+	top: 0;
+	width: 100%;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -o-sticky;
+	position: -ms-sticky;
+	position: sticky;
+	z-index: 2;
+	.table{
+		background: #fff;
+	}
+}
+.plane-icon{
+	width: 20px;
+	height: 20px;
+	.inline-block;
+	vertical-align: middle;
+	fill: black;
+	.transition(fill 0.3s);
+	svg{
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.table{
+	font-size: 13px;
+	margin: 0;
+	table-layout: fixed;
+	border-collapse: collapse;
+	img{
+		max-width: 100%;
+	}
+
+	tbody{
+		tr{
+			.transition(background 0.3s);
+			&:nth-child(odd){
+				td:nth-child(5){
+					&:before{
+						content: "";
+						position: absolute;
+						background-color: @table-bg-accent;
+						top: -1px;
+						bottom: -1px;
+						left: -5000px;
+						width: 10000px;
+						z-index: -2;
+						.transition(background 0.3s);
+					}
+				}
+			}
+			&:nth-child(even){
+				td:nth-child(5){
+					&:before{
+						content: "";
+						position: absolute;
+						top: -1px;
+						bottom: -1px;
+						left: -5000px;
+						width: 10000px;
+						z-index: -2;
+					}
+				}
+			}
+			&:hover{
+				background: @state-warning-bg;
+			}
+			.hidden-popup{
+				visibility: hidden;
+				.opacity(0);
+				position: absolute;
+				background: #fff;
+				color: #000;
+				width: 500px;
+				z-index: 1;
+				box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+				left: 45px;
+				top: 5px;
+				padding: 20px 20px 10px 60px;
+				.transition('visibility 0s ease 0.3s, opacity 0.3s ease, left 0.3s ease');
+				.company-logo-big{
+					position: absolute;
+					top: 10px;
+					right: 10px;
+				}
+				.plane-icon{
+					position: absolute;
+					top: 10px;
+					left: 10px;
+					width: 30px;
+					height: 30px;
+				}
+			}
+			&:focus{
+				outline: none;
+				.hidden-popup{
+					visibility: visible;
+					left: 5px;
+					.opacity(1);
+					.transition-delay(0s);
+					@media (min-width: 1100px){
+						display: none !important;
+					}
+				}
+			}
+			&:nth-last-child(1),
+			&:nth-last-child(2),
+			&:nth-last-child(3),
+			&:nth-last-child(4),
+			&:nth-last-child(5){
+				.hidden-popup{
+					top: auto;
+					bottom: 5px;
+				}
+			}
+		}
+
+	}
+	th, td{
+		position: relative;
+		padding: @table-cell-padding;
+		&:after{
+			content: "";
+			position: absolute;
+			.transition(background 0.3s);
+			left: 0;
+			top: -5000px;
+			height: 10000px;
+			width: 100%;
+			z-index: -1;
+		}
+		&:hover{
+			&:after{
+				background-color: @state-warning-bg;
+			}
+		}
+		&:nth-child(1){
+			width: 60px;
+		}
+		&:nth-child(2){
+			width: 80px;
+			text-align: center;
+			@media (min-width: 1150px) {
+				width: 105px;
+			}
+		}
+		&:nth-child(3){
+			width: 115px;
+			display: none;
+			@media (min-width: 1100px) {
+				display: table-cell;
+			}
+		}
+		&:nth-child(4){
+			width: 90px;
+		}
+		&:nth-child(5){
+			width: 95px;
+			@media (min-width: 1050px) {
+				width: 130px;
+			}
+		}
+		&:nth-child(6){
+			width: 130px;
+		}
+		&:nth-child(7){
+			text-align: center;
+			width: 95px;
+			@media (min-width: 1050px) {
+				width: 130px;
+			}
+		}
+		&:nth-child(8){
+			width: 100px;
+			@media (min-width: 1250px) {
+				width: 160px;
+			}
+		}
+		.small-res{
+			display: initial;
+		}
+		.big-res{
+			display: none;
+		}
+		@media (min-width: 1050px) {
+			.small-res{
+				display: none;
+			}
+			.big-res{
+				display: initial;
+			}
+		}
+	}
+	.status{
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-size: 75%;
+		.green{
+			color: #52ac40;
+		}
+		.grey{
+			color: #5f91a7;
+		}
+		.red{
+			color: #ff4800;
+		}
+	}
+}
+@arrival1: ~'~ tr:not(.arrival)';
+@arrival2: ~'@{arrival1} @{arrival1}';
+@arrival3: ~'@{arrival2} @{arrival1}';
+@arrival4: ~'@{arrival3} @{arrival1}';
+@arrival5: ~'@{arrival4} @{arrival1}';
+@arrival6: ~'@{arrival5} @{arrival1}';
+@arrival7: ~'@{arrival6} @{arrival1}';
+@arrival8: ~'@{arrival7} @{arrival1}';
+@arrival9: ~'@{arrival8} @{arrival1}';
+#arrival:checked ~ .table-part .table-cont{
+	tbody{
+		tr{
+			display: none;
+			&:nth-child(odd) td:nth-child(5):before{
+				background: transparent;
+			}
+			&.arrival{
+				display: table-row !important;
+				&:nth-child(odd){
+					td:nth-child(5):before{
+						background: @table-bg-accent;
+					}
+				}
+				&:nth-child(even){
+					td:nth-child(5):before{
+						background: transparent;
+					}
+				}
+				&.bottom{
+					.hidden-popup{
+						top: auto;
+						bottom: 5px;
+					}
+				}
+			}
+			&:not(.arrival) ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival1} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival2} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival3} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival4} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival5} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival6} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival7} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival8} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival9} ~ .arrival:nth-child(odd){
+				td:nth-child(5):before{
+					background: @table-bg-accent;
+				}
+			}
+			&:not(.arrival) ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival1} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival2} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival3} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival4} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival5} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival6} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival7} ~ .arrival:nth-child(even),
+			&:not(.arrival) @{arrival8} ~ .arrival:nth-child(odd),
+			&:not(.arrival) @{arrival9} ~ .arrival:nth-child(even){
+				td:nth-child(5):before{
+					background: transparent;
+				}
+			}
+
+		}
+	}
+}
+@departure1: ~'~ tr:not(.departure)';
+@departure2: ~'@{departure1} @{departure1}';
+@departure3: ~'@{departure2} @{departure1}';
+@departure4: ~'@{departure3} @{departure1}';
+@departure5: ~'@{departure4} @{departure1}';
+#departure:checked ~ .table-part .table-cont{
+	tbody{
+		tr{
+			display: none;
+			&:nth-child(odd) td:nth-child(5):before{
+				background: transparent;
+			}
+			&.departure{
+				display: table-row !important;
+				&:nth-child(odd){
+					td:nth-child(5):before{
+						background: @table-bg-accent;
+					}
+				}
+				&:nth-child(even){
+					td:nth-child(5):before{
+						background: transparent;
+					}
+				}
+				&.bottom{
+					.hidden-popup{
+						top: auto;
+						bottom: 5px;
+					}
+				}
+			}
+			&:not(.departure) ~ .departure:nth-child(even),
+			&:not(.departure) @{departure1} ~ .departure:nth-child(odd),
+			&:not(.departure) @{departure2} ~ .departure:nth-child(even),
+			&:not(.departure) @{departure3} ~ .departure:nth-child(odd),
+			&:not(.departure) @{departure4} ~ .departure:nth-child(even),
+			&:not(.departure) @{departure5} ~ .departure:nth-child(odd){
+				td:nth-child(5):before{
+					background: @table-bg-accent;
+				}
+			}
+			&:not(.departure) ~ .departure:nth-child(odd),
+			&:not(.departure) @{departure1} ~ .departure:nth-child(even),
+			&:not(.departure) @{departure2} ~ .departure:nth-child(odd),
+			&:not(.departure) @{departure3} ~ .departure:nth-child(even),
+			&:not(.departure) @{departure4} ~ .departure:nth-child(odd),
+			&:not(.departure) @{departure5} ~ .departure:nth-child(even){
+				td:nth-child(5):before{
+					background: transparent;
+				}
+			}
+		}
+	}
+}
+#arrival:checked ~ #departure:checked ~ .table-part .table-cont{
+	tbody{
+		tr{
+			display: none;
+			&:nth-child(odd) td:nth-child(5):before{
+				background: @table-bg-accent !important;
+			}
+			&:nth-child(even) td:nth-child(5):before{
+				background: transparent !important;
+			}
+			&.bottom{
+				.hidden-popup{
+					bottom: auto;
+					top: 5px;
+				}
+			}
+			&:nth-last-child(1),
+			&:nth-last-child(2),
+			&:nth-last-child(3),
+			&:nth-last-child(4),
+			&:nth-last-child(5){
+				.hidden-popup{
+					top: auto !important;
+					bottom: 5px !important;
+				}
+			}
+		}
+	}
+}
+
+.company-logo-big{
+	position: relative;
+	.inline-block;
+	vertical-align: middle;
+	&.air-serbia{
+		.sprite(@s-air-serbia-big);
+	}
+	&.aeroflot{
+		.sprite(@s-aeroflot-big);
+	}
+	&.airfrance{
+		.sprite(@s-airfrance-big);
+	}
+	&.klm{
+		.sprite(@s-klm-big);
+	}
+	&.alitalia{
+		.sprite(@s-alitalia-big);
+	}
+	&.royal-flight{
+		.sprite(@s-royal-flight-big);
+	}
+	&.onurair{
+		.sprite(@s-onurair-big);
+	}
+	&.pegas-fly{
+		.sprite(@s-pegas-big);
+	}
+	&.vueling{
+		.sprite(@s-vueling-big);
+	}
+	&.nw{
+		.sprite(@s-nw-big);
+	}
+	&.czech{
+		.sprite(@s-czechairlines-big);
+	}
+	&.air-europa{
+		.sprite(@s-aireurope-big);
+	}
+	&.chine-eastern-airlines{
+		.sprite(@s-chine-eastern-air-big);
+	}
+}
+.company-logo-small{
+	position: relative;
+	.inline-block;
+	vertical-align: middle;
+	&.air-serbia{
+		.sprite(@s-air-serbia-small);
+	}
+	&.aeroflot{
+		.sprite(@s-aeroflot-small);
+	}
+	&.airfrance{
+		.sprite(@s-airfrance-small);
+	}
+	&.klm{
+		.sprite(@s-klm-small);
+	}
+	&.alitalia{
+		.sprite(@s-alitalia-small);
+	}
+	&.royal-flight{
+		.sprite(@s-royal-flight-small);
+	}
+	&.onurair{
+		.sprite(@s-onurair-small);
+	}
+	&.pegas-fly{
+		.sprite(@s-pegas-small);
+	}
+	&.vueling{
+		.sprite(@s-vueling-small);
+	}
+	&.nw{
+		.sprite(@s-nw-small);
+	}
+	&.czech{
+		.sprite(@s-czechairlines-small);
+	}
+	&.air-europa{
+		.sprite(@s-aireurope-small);
+	}
+	&.chine-eastern-airlines{
+		.sprite(@s-chine-eastern-air-small);
+	}
+}
